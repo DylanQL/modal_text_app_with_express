@@ -13,6 +13,25 @@ class AppConstants {
   static const String entrada = 'ENTRADA';
   static const String salida = 'SALIDA';
   
+  // Tipos de material comunes
+  static const List<String> tiposMaterial = [
+    'Electrónico',
+    'Plástico',
+    'Metal',
+    'Aleación de Aluminio',
+    'Acero',
+    'Cobre',
+    'Textil',
+    'Cuero',
+    'Madera',
+    'Vidrio',
+    'Cerámica',
+    'Goma',
+    'Papel',
+    'Cartón',
+    'Otros',
+  ];
+  
   // Rangos de códigos numéricos
   static const int minCodigoNumerico = 1000;
   static const int maxCodigoNumerico = 9999;
@@ -77,6 +96,7 @@ class AppStrings {
   static const String colorLabel = 'Color';
   static const String capacidadLabel = 'Capacidad';
   static const String unidadVentaLabel = 'Unidad de Venta';
+  static const String tipoMaterialLabel = 'Tipo de Material';
   static const String rackLabel = 'Rack';
   static const String nivelLabel = 'Nivel';
   static const String imagenLabel = 'URL de Imagen';
@@ -92,6 +112,7 @@ class AppStrings {
   static const String colorHint = 'Ej: Silver, Black, etc.';
   static const String capacidadHint = 'Ej: 16GB, 32GB, etc.';
   static const String unidadVentaHint = 'Ej: Unidad, Caja, Paquete, etc.';
+  static const String tipoMaterialHint = 'Seleccione el tipo de material';
   static const String rackHint = 'Ej: A1, B2, etc.';
   static const String nivelHint = 'Ej: 1, 2, 3, etc.';
   static const String imagenHint = 'https://ejemplo.com/imagen.jpg';

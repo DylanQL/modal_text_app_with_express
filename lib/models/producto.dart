@@ -10,6 +10,7 @@ class Producto {
   final String color;
   final String capacidad;
   final String unidadVenta;
+  final String? tipoMaterial;
   final String rack;
   final String nivel;
   final String codigoNumerico;
@@ -28,6 +29,7 @@ class Producto {
     required this.color,
     required this.capacidad,
     required this.unidadVenta,
+    this.tipoMaterial,
     required this.rack,
     required this.nivel,
     required this.codigoNumerico,
@@ -48,6 +50,7 @@ class Producto {
       'color': color,
       'capacidad': capacidad,
       'unidad_venta': unidadVenta,
+      'tipo_material': tipoMaterial,
       'rack': rack,
       'nivel': nivel,
       'codigo_numerico': codigoNumerico,
@@ -69,6 +72,7 @@ class Producto {
       color: map['color'] ?? '',
       capacidad: map['capacidad'] ?? '',
       unidadVenta: map['unidad_venta'] ?? '',
+      tipoMaterial: map['tipo_material'],
       rack: map['rack'] ?? '',
       nivel: map['nivel'] ?? '',
       codigoNumerico: map['codigo_numerico'] ?? '',
@@ -113,6 +117,7 @@ class Producto {
     String? color,
     String? capacidad,
     String? unidadVenta,
+    String? tipoMaterial,
     String? rack,
     String? nivel,
     String? codigoNumerico,
@@ -131,6 +136,7 @@ class Producto {
       color: color ?? this.color,
       capacidad: capacidad ?? this.capacidad,
       unidadVenta: unidadVenta ?? this.unidadVenta,
+      tipoMaterial: tipoMaterial ?? this.tipoMaterial,
       rack: rack ?? this.rack,
       nivel: nivel ?? this.nivel,
       codigoNumerico: codigoNumerico ?? this.codigoNumerico,
