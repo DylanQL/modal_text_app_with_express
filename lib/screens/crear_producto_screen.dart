@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../providers/inventario_provider.dart';
 import '../models/producto.dart';
-import '../constants/app_constants.dart';
 
 class CrearProductoScreen extends StatefulWidget {
   final String tipoProducto;
@@ -33,8 +32,7 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
   final _rackController = TextEditingController();
   final _nivelController = TextEditingController();
   final _imagenController = TextEditingController();
-
-  String? _tipoMaterialSeleccionado;
+  final _tipoMaterialController = TextEditingController();
 
   bool _isCreating = false;
   String _idGeneradoPreview = '';
@@ -52,6 +50,7 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
     _rackController.dispose();
     _nivelController.dispose();
     _imagenController.dispose();
+    _tipoMaterialController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -209,62 +208,12 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
                       ),
                       const SizedBox(height: 20),
                       
-                      // Dropdown para Tipo de Material
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: const Color(0xFF6C63FF), width: 2),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.category_outlined,
-                                color: const Color(0xFF6C63FF),
-                                size: 24,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    value: _tipoMaterialSeleccionado,
-                                    hint: Text(
-                                      'Selecciona Tipo de Material *',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    isExpanded: true,
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: const Color(0xFF6C63FF),
-                                    ),
-                                    items: AppConstants.tiposMaterial.map((String tipo) {
-                                      return DropdownMenuItem<String>(
-                                        value: tipo,
-                                        child: Text(
-                                          tipo,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.black87,
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String? newValue) {
-                                      setState(() {
-                                        _tipoMaterialSeleccionado = newValue;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      // Campo de texto para Tipo de Material
+                      _buildTextField(
+                        controller: _tipoMaterialController,
+                        label: 'Tipo de Material *',
+                        icon: Icons.category_outlined,
+                        onChanged: (value) => _updateIdPreview(),
                       ),
                       const SizedBox(height: 20),
                       
@@ -420,17 +369,6 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
       return;
     }
 
-    // Validar que se haya seleccionado un tipo de material
-    if (_tipoMaterialSeleccionado == null || _tipoMaterialSeleccionado!.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Por favor selecciona un tipo de material'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
-
     setState(() {
       _isCreating = true;
     });
@@ -451,7 +389,7 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
       codigoNumerico: '', // Será generado en el servicio
       imagen: _imagenController.text.trim().isEmpty ? null : _imagenController.text.trim(),
       stockActual: 0,
-      tipoMaterial: _tipoMaterialSeleccionado!,
+      tipoMaterial: _tipoMaterialController.text.trim(),
     );
 
     final provider = Provider.of<InventarioProvider>(context, listen: false);
