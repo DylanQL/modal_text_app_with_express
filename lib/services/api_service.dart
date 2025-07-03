@@ -14,7 +14,7 @@ class ApiService {
   }
 
   // URL base del API - CAMBIAR SEGÚN TU CONFIGURACIÓN
-  static const String baseUrl = 'http://localhost:3000/api';
+  static const String baseUrl = 'https://backend-api-modatext.vercel.app/api';
   
   // Headers por defecto
   Map<String, String> get _headers => {
@@ -314,7 +314,7 @@ class ApiService {
   Future<bool> verificarConectividad() async {
     try {
       final response = await http.get(
-        Uri.parse('${baseUrl.replaceAll('/api', '')}/health'),
+        Uri.parse('https://backend-api-modatext.vercel.app/health'),
         headers: _headers,
       ).timeout(const Duration(seconds: 10));
       
