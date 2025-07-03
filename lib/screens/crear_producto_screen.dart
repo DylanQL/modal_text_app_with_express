@@ -202,7 +202,9 @@ class _CrearProductoScreenState extends State<CrearProductoScreen> {
                       
                       _buildTextField(
                         controller: _unidadVentaController,
-                        label: 'Unidad de Venta *',
+                        label: widget.tipoProducto == 'MateriaPrima' 
+                            ? 'Unidad de Costo *' 
+                            : 'Unidad de Venta *',
                         icon: Icons.shopping_cart,
                         onChanged: (_) => _updateIdPreview(),
                       ),
